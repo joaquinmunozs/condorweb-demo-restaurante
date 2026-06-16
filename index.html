@@ -60,6 +60,22 @@
     .btn-wsp:hover { background: var(--wsp-oscuro); transform: translateY(-3px); }
 
     /* =========================================================
+       LOGO (marca) — lockup de nav + escudo (crest) reutilizable
+       ========================================================= */
+    .logo { display: inline-flex; align-items: center; gap: 11px; }
+    .logo .logo-img { height: 38px; width: auto; display: none; }
+    .logo .word { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.32rem; letter-spacing: .4px; color: var(--crema); line-height: 1; }
+    .logo .word b { color: var(--dorado); font-weight: 800; }
+    .logo.con-img .markwrap, .logo.con-img .word { display: none; }
+    .logo.con-img .logo-img { display: block; }
+    /* Slots donde se inyecta el escudo vectorial */
+    .crest-slot svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 10px 24px rgba(0,0,0,.45)); }
+    .hero .crest-slot { width: 86px; height: 86px; margin: 0 auto 18px; animation: aparece 1s ease both; }
+    footer .crest-slot { width: 92px; height: 92px; margin: 0 auto 8px; }
+    @keyframes aparece { from { opacity: 0; transform: translateY(12px) scale(.9); } to { opacity: 1; transform: none; } }
+    @media (min-width: 720px) { .hero .crest-slot { margin: 0 0 18px; } }
+
+    /* =========================================================
        HERO con profundidad 3D y paralaje
        ========================================================= */
     .hero {
@@ -334,7 +350,21 @@
 
     <div class="contenedor" style="display:flex;flex-direction:column;flex:1;">
       <nav class="nav">
-        <div class="logo-texto">La Causa de <span class="acento">Don Lucho</span></div>
+        <a class="logo" id="logoNav" href="#hero" aria-label="La Causa de Don Lucho">
+          <img class="logo-img" src="assets/logo.png" alt="La Causa de Don Lucho" />
+          <span class="markwrap">
+            <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
+              <g fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-linecap="round">
+                <path d="M18 13 q-3 -3 0 -6 q3 -3 0 -6"/><path d="M24 13 q-3 -3 0 -6 q3 -3 0 -6"/><path d="M30 13 q-3 -3 0 -6 q3 -3 0 -6"/>
+              </g>
+              <ellipse cx="24" cy="17" rx="13" ry="3.2" fill="#c8a96e"/>
+              <path d="M11 17 C11 31 16 39 24 39 C32 39 37 31 37 17 Z" fill="#c8a96e"/>
+              <path d="M11 21 C6 22 6 29 11 31" fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M37 21 C42 22 42 29 37 31" fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="word">La Causa de <b>Don Lucho</b></span>
+        </a>
         <div class="nav-links">
           <a href="#historia">Historia</a>
           <a href="#platos">Platos</a>
@@ -345,6 +375,7 @@
 
       <div class="hero-grid">
         <div>
+          <div class="crest-slot" aria-hidden="true"></div>
           <span class="hero-sello">Cocina criolla peruana</span>
           <h1>La Causa de <em>Don Lucho</em></h1>
           <p class="frase">Sabor criollo desde 1987 · Barranco, Lima</p>
@@ -536,6 +567,7 @@
   <!-- ============================ FOOTER ============================ -->
   <footer>
     <div class="contenedor">
+      <div class="crest-slot" aria-hidden="true"></div>
       <div class="logo-texto">La Causa de <span class="acento">Don Lucho</span></div>
       <p class="frase-foot">"Donde el sabor criollo se hace familia"</p>
       <div class="redes">
@@ -553,7 +585,46 @@
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.515 5.26l-.999 3.648 3.733-.979zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
   </a>
 
+  <!-- Plantilla del ESCUDO (crest). Se clona en cada .crest-slot -->
+  <template id="crestTpl">
+    <svg viewBox="0 0 220 220" role="img" aria-label="Escudo La Causa de Don Lucho">
+      <defs>
+        <path id="arcTop" d="M40,74 Q110,30 180,74" />
+        <path id="arcBot" d="M44,150 Q110,196 176,150" />
+      </defs>
+      <circle cx="110" cy="110" r="104" fill="none" stroke="#c8a96e" stroke-width="2"/>
+      <circle cx="110" cy="110" r="96" fill="none" stroke="#c8a96e" stroke-width="1" opacity=".55"/>
+      <text fill="#e7d3a6" font-family="'Playfair Display', serif" font-size="15" font-weight="700" letter-spacing="2.5">
+        <textPath href="#arcTop" startOffset="50%" text-anchor="middle">LA CAUSA DE DON LUCHO</textPath>
+      </text>
+      <text fill="#c8a96e" font-family="'Lato', sans-serif" font-size="10.5" font-weight="700" letter-spacing="3">
+        <textPath href="#arcBot" startOffset="50%" text-anchor="middle">BARRANCO · LIMA · 1987</textPath>
+      </text>
+      <g fill="#c8a96e"><path d="M34 110 l4 4 -4 4 -4 -4 z"/><path d="M186 110 l4 4 -4 4 -4 -4 z"/></g>
+      <g>
+        <g fill="none" stroke="#c8a96e" stroke-width="3" stroke-linecap="round">
+          <path d="M98 104 q-7 -7 0 -13 q7 -6 0 -13"/><path d="M110 104 q-7 -7 0 -13 q7 -6 0 -13"/><path d="M122 104 q-7 -7 0 -13 q7 -6 0 -13"/>
+        </g>
+        <ellipse cx="110" cy="112" rx="30" ry="7" fill="#c8a96e"/>
+        <path d="M80 112 C80 142 92 156 110 156 C128 156 140 142 140 112 Z" fill="#c8a96e"/>
+        <path d="M80 120 C68 122 68 140 80 144" fill="none" stroke="#c8a96e" stroke-width="3" stroke-linecap="round"/>
+        <path d="M140 120 C152 122 152 140 140 144" fill="none" stroke="#c8a96e" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </template>
+
   <script>
+    /* ===== 0) Inyectar el escudo en sus slots + swap a logo real ===== */
+    (function () {
+      var tpl = document.getElementById('crestTpl');
+      document.querySelectorAll('.crest-slot').forEach(function (slot) {
+        slot.appendChild(tpl.content.cloneNode(true));
+      });
+      // Si existe assets/logo.png, reemplaza el lockup vectorial del nav
+      var img = document.querySelector('#logoNav .logo-img');
+      if (img) { img.addEventListener('load', function () { document.getElementById('logoNav').classList.add('con-img'); }); }
+    })();
+
     /* ===== 1) Animaciones de entrada con IntersectionObserver ===== */
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
