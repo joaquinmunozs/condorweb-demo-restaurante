@@ -39,11 +39,20 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Manrope', system-ui, sans-serif;
-      background: radial-gradient(70% 50% at 50% 0%, rgba(200,169,110,.12), transparent 60%), #0d0b0a;
+      background:
+        radial-gradient(75% 45% at 50% -8%, rgba(200,169,110,.22), transparent 60%),
+        radial-gradient(85% 55% at 100% 108%, rgba(139,26,26,.30), transparent 55%),
+        radial-gradient(85% 55% at 0% 112%, rgba(110,19,19,.24), transparent 55%),
+        linear-gradient(170deg, #1c130d 0%, #130c09 55%, #0d0908 100%);
+      background-attachment: fixed;
       color: var(--crema); -webkit-font-smoothing: antialiased;
       padding-bottom: calc(86px + env(safe-area-inset-bottom));
       overflow-x: hidden;
     }
+    /* Fondo decorativo basado en el logo: emblema fantasma + grano vintage */
+    .bg-fx { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+    .bg-fx::before { content: ""; position: absolute; inset: 0; background: url("assets/logo.png") no-repeat center 14%; background-size: min(620px, 94vw); opacity: .055; }
+    .bg-fx::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E"); opacity: .3; mix-blend-mode: soft-light; }
     h1, h2, h3 { font-family: 'Fraunces', serif; }
     a { text-decoration: none; color: inherit; }
     .contenedor { width: 100%; max-width: 920px; margin: 0 auto; padding: 0 16px; }
@@ -195,6 +204,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Fondo decorativo (emblema + grano), basado en el logo -->
+  <div class="bg-fx" aria-hidden="true"></div>
 
   <!-- ============================ TOPBAR ============================ -->
   <div class="topbar">
