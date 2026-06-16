@@ -20,7 +20,7 @@
   <!-- ===== Fuentes: Playfair Display (títulos) + Lato (cuerpo) ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,500;1,700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
 
   <style>
     /* =========================================================
@@ -38,13 +38,13 @@
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Lato', system-ui, sans-serif;
+      font-family: 'Manrope', system-ui, sans-serif;
       background: radial-gradient(70% 50% at 50% 0%, rgba(200,169,110,.12), transparent 60%), #0d0b0a;
       color: var(--crema); -webkit-font-smoothing: antialiased;
       padding-bottom: calc(86px + env(safe-area-inset-bottom));
       overflow-x: hidden;
     }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    h1, h2, h3 { font-family: 'Fraunces', serif; }
     a { text-decoration: none; color: inherit; }
     .contenedor { width: 100%; max-width: 920px; margin: 0 auto; padding: 0 16px; }
 
@@ -53,7 +53,7 @@
        ========================================================= */
     .logo { display: inline-flex; align-items: center; gap: 10px; }
     .logo .logo-ico { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); }
-    .logo .word { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.02rem; line-height: 1; letter-spacing: .3px; }
+    .logo .word { font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.02rem; line-height: 1; letter-spacing: .3px; }
     .logo .word b { color: var(--dorado); font-weight: 800; }
 
     /* =========================================================
@@ -97,7 +97,7 @@
     .filtros::-webkit-scrollbar { display: none; }
     .chip {
       flex: 0 0 auto; cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
-      font-family: 'Lato', sans-serif; font-weight: 700; font-size: .84rem; white-space: nowrap;
+      font-family: 'Manrope', sans-serif; font-weight: 700; font-size: .84rem; white-space: nowrap;
       padding: 9px 16px; border-radius: 999px; color: var(--dorado-claro);
       background: rgba(200,169,110,.08); border: 1px solid rgba(200,169,110,.35);
       transition: all .25s ease;
@@ -129,8 +129,7 @@
 
     /* ---------- ZONA MULTIMEDIA (video + escena 3D) ---------- */
     .media { position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
-    .plato-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s ease; z-index: 2; }
-    .plato-video.listo { opacity: 1; }
+    .plato-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; }
 
     /* ---------- ESCENA 3D CINEMATOGRÁFICA (fallback CSS) ---------- */
     .escena {
@@ -172,7 +171,7 @@
     .info { padding: 13px 14px 15px; }
     .info p { font-size: .82rem; font-weight: 300; color: rgba(253,246,227,.75); margin-bottom: 12px; min-height: 2.6em; }
     .info .fila { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .precio { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.3rem; color: var(--dorado-claro); }
+    .precio { font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.3rem; color: var(--dorado-claro); }
     .pedir { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; background: var(--wsp); color: #fff; padding: 8px 13px; border-radius: 999px; transition: background .2s ease, transform .2s ease; }
     .pedir:hover { background: var(--wsp-oscuro); transform: translateY(-2px); }
     .pedir svg { width: 15px; height: 15px; fill: #fff; }
@@ -181,9 +180,13 @@
        BARRA FIJA INFERIOR — Reservar
        ========================================================= */
     .barra-reserva { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(0deg, #0d0b0a 72%, rgba(13,11,10,0)); }
-    .barra-reserva a { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 480px; margin: 0 auto; background: var(--wsp); color: #fff; font-weight: 700; font-size: 1rem; padding: 15px; border-radius: 14px; text-transform: uppercase; letter-spacing: .5px; box-shadow: 0 12px 30px -8px rgba(37,211,102,.7); transition: background .25s ease, transform .25s ease; }
-    .barra-reserva a:hover { background: var(--wsp-oscuro); transform: translateY(-2px); }
-    .barra-reserva svg { width: 22px; height: 22px; fill: #fff; }
+    .barra-reserva a { display: flex; align-items: center; gap: 13px; width: 100%; max-width: 460px; margin: 0 auto; color: #fff; padding: 9px 22px 9px 9px; border-radius: 18px; background: linear-gradient(135deg, #0e8a6f 0%, #1ebe57 55%, #25d366 100%); border: 1px solid rgba(255,255,255,.18); box-shadow: 0 16px 40px -12px rgba(18,140,126,.7), inset 0 1px 0 rgba(255,255,255,.28); transition: transform .25s ease, box-shadow .25s ease; }
+    .barra-reserva a:hover { transform: translateY(-2px); box-shadow: 0 24px 50px -14px rgba(18,140,126,.8), inset 0 1px 0 rgba(255,255,255,.28); }
+    .barra-reserva .ic { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; }
+    .barra-reserva .ic svg { width: 25px; height: 25px; fill: #fff; }
+    .barra-reserva .txt { display: flex; flex-direction: column; line-height: 1.12; text-align: left; }
+    .barra-reserva .txt small { font-size: .72rem; font-weight: 600; opacity: .9; letter-spacing: .2px; }
+    .barra-reserva .txt b { font-size: 1.05rem; font-weight: 800; letter-spacing: .2px; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -225,8 +228,8 @@
   <!-- ============================ BARRA FIJA RESERVAR ============================ -->
   <div class="barra-reserva">
     <a href="https://wa.me/51998877665?text=Hola%20Don%20Lucho,%20vi%20la%20carta%20y%20quiero%20reservar" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.515 5.26l-.999 3.648 3.733-.979z"/></svg>
-      Reservar por WhatsApp
+      <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.515 5.26l-.999 3.648 3.733-.979z"/></svg></span>
+      <span class="txt"><small>Mesa para hoy · respuesta inmediata</small><b>Reservar por WhatsApp</b></span>
     </a>
   </div>
 
@@ -298,19 +301,12 @@
       art.style.setProperty('--tema', p.tema);
       art.innerHTML = `
         <div class="media">
-          <video class="plato-video" muted loop playsinline preload="none">
+          <div class="escena" aria-hidden="true"></div>
+          <video class="plato-video" autoplay muted loop playsinline preload="auto">
             <source src="${p.video}" type="video/mp4" />
           </video>
-          <div class="escena" aria-hidden="true">
-            <div class="platillo3d">
-              <div class="halo"></div><div class="anillo"></div><div class="anillo b"></div>
-              <div class="plato-emoji">${p.emoji}</div>
-            </div>
-            <div class="vapor"><span></span><span></span><span></span></div>
-          </div>
           <div class="scrim"></div>
           ${p.reco ? '<span class="badge">⭐ Recomendado</span>' : ''}
-          <span class="live" hidden><span class="dot"></span> En vivo</span>
           <div class="titulo"><span class="cat">${p.tag}</span><h3>${p.nombre}</h3></div>
         </div>
         <div class="info">
@@ -378,34 +374,17 @@
        REPRODUCCIÓN AUTOMÁTICA "AL PASAR SOBRE" CADA PLATO
        ========================================================= */
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const tactil = window.matchMedia('(hover: none)').matches;
 
-    function activarVideo(card, on) {
-      const v = card.querySelector('.plato-video');
-      const live = card.querySelector('.live');
-      if (!v) return;
-      if (on) {
-        if (v.preload === 'none') v.preload = 'auto';
-        const pr = v.play();
-        if (pr && pr.then) pr.then(() => { if (v.readyState >= 2) { v.classList.add('listo'); if (live) live.hidden = false; } }).catch(() => {});
-      } else { v.pause(); v.classList.remove('listo'); if (live) live.hidden = true; }
-    }
-
-    document.querySelectorAll('.plato-video').forEach((v) => {
-      v.addEventListener('loadeddata', () => { v.classList.add('listo'); const live = v.closest('.media').querySelector('.live'); if (live) live.hidden = false; });
-      v.addEventListener('error', () => { v.classList.remove('listo'); const live = v.closest('.media').querySelector('.live'); if (live) live.hidden = true; });
-    });
-
-    if (!tactil) {
-      tarjetas.forEach((card) => {
-        card.addEventListener('mouseenter', () => activarVideo(card, true));
-        card.addEventListener('mouseleave', () => activarVideo(card, false));
-      });
-    }
-    if (tactil && 'IntersectionObserver' in window) {
+    /* Los videos se reproducen solos; pausamos los que salen de pantalla
+       (ahorra batería/CPU) sin mostrar ningún ícono de preview. */
+    if ('IntersectionObserver' in window) {
       const obsPlay = new IntersectionObserver((entradas) => {
-        entradas.forEach((e) => activarVideo(e.target, e.isIntersecting && e.intersectionRatio > 0.7));
-      }, { threshold: [0, 0.7, 1] });
+        entradas.forEach((e) => {
+          const v = e.target.querySelector('.plato-video');
+          if (!v) return;
+          if (e.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+        });
+      }, { threshold: 0.35 });
       tarjetas.forEach((c) => obsPlay.observe(c));
     }
 
