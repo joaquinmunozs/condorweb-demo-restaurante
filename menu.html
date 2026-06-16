@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Carta · La Causa de Don Lucho</title>
   <meta name="description" content="Carta digital de La Causa de Don Lucho — comida criolla peruana en Barranco, Lima." />
+  <meta name="theme-color" content="#0d0b0a" />
+
+  <!-- Favicon e íconos con el logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+
+  <!-- Open Graph (vista previa al compartir) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Carta · La Causa de Don Lucho" />
+  <meta property="og:description" content="Nuestra carta criolla en Barranco, Lima. Mira cada plato en video." />
+  <meta property="og:image" content="https://joaquinmunozs.github.io/condorweb-demo-restaurante/assets/logo.png" />
 
   <!-- ===== Fuentes: Playfair Display (títulos) + Lato (cuerpo) ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,13 +52,9 @@
        LOGO (marca reutilizable) — olla de barro humeante
        ========================================================= */
     .logo { display: inline-flex; align-items: center; gap: 10px; }
-    .logo .mark { flex: 0 0 auto; display: block; }
+    .logo .logo-ico { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); }
     .logo .word { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.02rem; line-height: 1; letter-spacing: .3px; }
     .logo .word b { color: var(--dorado); font-weight: 800; }
-    /* Imagen de logo real (se muestra sola si existe assets/logo.png) */
-    .logo .logo-img { height: 34px; width: auto; display: none; }
-    .logo.con-img .mark, .logo.con-img .word { display: none; }
-    .logo.con-img .logo-img { display: block; }
 
     /* =========================================================
        TOPBAR sticky
@@ -71,7 +78,7 @@
        CABECERA DE LA CARTA con escudo (crest)
        ========================================================= */
     .carta-head { text-align: center; padding: 40px 16px 18px; }
-    .carta-head .crest { width: 116px; height: 116px; margin: 0 auto 14px; display: block; filter: drop-shadow(0 10px 24px rgba(0,0,0,.5)); animation: aparece .9s ease both; }
+    .carta-head .crest { width: 124px; height: auto; margin: 0 auto 14px; display: block; object-fit: contain; filter: drop-shadow(0 10px 24px rgba(0,0,0,.5)); animation: aparece .9s ease both; }
     @keyframes aparece { from { opacity: 0; transform: translateY(14px) scale(.92); } to { opacity: 1; transform: none; } }
     .carta-head h1 { font-size: clamp(2rem, 9vw, 2.9rem); font-weight: 900; }
     .carta-head h1 em { font-style: italic; color: var(--dorado-claro); }
@@ -188,21 +195,8 @@
 
   <!-- ============================ TOPBAR ============================ -->
   <div class="topbar">
-    <a class="logo" id="logoTop" href="index.html" aria-label="La Causa de Don Lucho">
-      <!-- Logo real (cuando exista assets/logo.png) -->
-      <img class="logo-img" src="assets/logo.png" alt="La Causa de Don Lucho" />
-      <!-- Logo vectorial: olla de barro humeante -->
-      <svg class="mark" viewBox="0 0 48 48" width="30" height="30" aria-hidden="true">
-        <g fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-linecap="round">
-          <path d="M18 13 q-3 -3 0 -6 q3 -3 0 -6"/>
-          <path d="M24 13 q-3 -3 0 -6 q3 -3 0 -6"/>
-          <path d="M30 13 q-3 -3 0 -6 q3 -3 0 -6"/>
-        </g>
-        <ellipse cx="24" cy="17" rx="13" ry="3.2" fill="#c8a96e"/>
-        <path d="M11 17 C11 31 16 39 24 39 C32 39 37 31 37 17 Z" fill="#c8a96e"/>
-        <path d="M11 21 C6 22 6 29 11 31" fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-linecap="round"/>
-        <path d="M37 21 C42 22 42 29 37 31" fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-linecap="round"/>
-      </svg>
+    <a class="logo" href="index.html" aria-label="La Causa de Don Lucho">
+      <img class="logo-ico" src="assets/logo.png" alt="" />
       <span class="word">La Causa de <b>Don Lucho</b></span>
     </a>
     <a class="btn-volver" href="index.html">← Inicio</a>
@@ -210,35 +204,8 @@
 
   <!-- ============================ CABECERA ============================ -->
   <div class="carta-head">
-    <!-- ESCUDO / CREST (logo vectorial completo) -->
-    <svg class="crest" viewBox="0 0 220 220" role="img" aria-label="Escudo La Causa de Don Lucho">
-      <defs>
-        <path id="arcTop" d="M40,74 Q110,30 180,74" />
-        <path id="arcBot" d="M44,150 Q110,196 176,150" />
-      </defs>
-      <circle cx="110" cy="110" r="104" fill="none" stroke="#c8a96e" stroke-width="2"/>
-      <circle cx="110" cy="110" r="96" fill="none" stroke="#c8a96e" stroke-width="1" opacity=".55"/>
-      <text fill="#e7d3a6" font-family="'Playfair Display', serif" font-size="15" font-weight="700" letter-spacing="2.5">
-        <textPath href="#arcTop" startOffset="50%" text-anchor="middle">LA CAUSA DE DON LUCHO</textPath>
-      </text>
-      <text fill="#c8a96e" font-family="'Lato', sans-serif" font-size="10.5" font-weight="700" letter-spacing="3">
-        <textPath href="#arcBot" startOffset="50%" text-anchor="middle">BARRANCO · LIMA · 1987</textPath>
-      </text>
-      <!-- adornos laterales -->
-      <g fill="#c8a96e"><path d="M34 110 l4 4 -4 4 -4 -4 z"/><path d="M186 110 l4 4 -4 4 -4 -4 z"/></g>
-      <!-- olla humeante central -->
-      <g>
-        <g fill="none" stroke="#c8a96e" stroke-width="3" stroke-linecap="round">
-          <path d="M98 104 q-7 -7 0 -13 q7 -6 0 -13"/>
-          <path d="M110 104 q-7 -7 0 -13 q7 -6 0 -13"/>
-          <path d="M122 104 q-7 -7 0 -13 q7 -6 0 -13"/>
-        </g>
-        <ellipse cx="110" cy="112" rx="30" ry="7" fill="#c8a96e"/>
-        <path d="M80 112 C80 142 92 156 110 156 C128 156 140 142 140 112 Z" fill="#c8a96e"/>
-        <path d="M80 120 C68 122 68 140 80 144" fill="none" stroke="#c8a96e" stroke-width="3" stroke-linecap="round"/>
-        <path d="M140 120 C152 122 152 140 140 144" fill="none" stroke="#c8a96e" stroke-width="3" stroke-linecap="round"/>
-      </g>
-    </svg>
+    <!-- ESCUDO / LOGO real del restaurante -->
+    <img class="crest" src="assets/logo.png" alt="La Causa de Don Lucho" />
 
     <h1>Nuestra <em>Carta</em></h1>
     <p>Cocina criolla · Barranco, Lima</p>
@@ -264,14 +231,6 @@
   </div>
 
   <script>
-    /* =========================================================
-       LOGO REAL: si existe assets/logo.png, reemplaza al vectorial
-       ========================================================= */
-    (function () {
-      const img = document.querySelector('#logoTop .logo-img');
-      if (img) { img.addEventListener('load', () => document.getElementById('logoTop').classList.add('con-img')); }
-    })();
-
     /* =========================================================
        CATEGORÍAS
        -------------------------------------------------------
