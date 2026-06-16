@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carta · La Causa de Don Lucho</title>
+  <meta name="description" content="Carta digital de La Causa de Don Lucho — comida criolla en Barranco, Lima." />
+
+  <!-- ===== Fuentes: Playfair Display + Lato ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,500&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       VARIABLES — misma identidad que index.html
+       ========================================================= */
+    :root {
+      --dorado: #c8a96e;
+      --dorado-claro: #e2cb9a;
+      --rojo: #8b1a1a;
+      --rojo-oscuro: #6e1313;
+      --crema: #fdf6e3;
+      --crema-oscura: #f3e8cc;
+      --negro: #1a1a1a;
+      --negro-suave: #2a2522;
+      --texto: #4a423a;
+      --wsp: #25d366;
+      --wsp-oscuro: #1ebe57;
+      --radio: 14px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', system-ui, sans-serif;
+      color: var(--texto); background: var(--crema);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      padding-bottom: 90px; /* espacio para el botón fijo inferior */
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; color: inherit; }
+    .contenedor { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 18px; }
+
+    /* =========================================================
+       HEADER pequeño y pegajoso (sticky)
+       ========================================================= */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--negro); color: var(--crema);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.25);
+    }
+    .topbar .logo { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.1rem; line-height: 1.1; }
+    .topbar .logo span { color: var(--dorado); }
+    .btn-volver {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+      border: 1px solid rgba(200,169,110,.45); color: var(--dorado-claro);
+      padding: 8px 14px; border-radius: 999px; transition: all .2s ease;
+    }
+    .btn-volver:hover { background: var(--dorado); color: var(--negro); }
+
+    /* =========================================================
+       CABECERA DE LA CARTA
+       ========================================================= */
+    .carta-head {
+      text-align: center; padding: 38px 18px 10px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(200,169,110,.18), transparent 60%);
+    }
+    .carta-head .ornamento { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--dorado); margin-bottom: 12px; }
+    .carta-head .ornamento::before, .carta-head .ornamento::after { content: ""; width: 44px; height: 1px; background: var(--dorado); }
+    .carta-head h1 { font-size: clamp(2rem, 9vw, 2.8rem); font-weight: 900; color: var(--negro); }
+    .carta-head h1 em { font-style: italic; color: var(--rojo); }
+    .carta-head p { color: var(--texto); font-size: .92rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
+
+    /* =========================================================
+       TABS DE CATEGORÍAS (sticky bajo el topbar)
+       ========================================================= */
+    .tabs {
+      position: sticky; top: 56px; z-index: 40;
+      display: flex; gap: 8px; overflow-x: auto; padding: 14px 18px;
+      background: var(--crema); border-bottom: 1px solid rgba(200,169,110,.35);
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex: 0 0 auto; cursor: pointer;
+      font-weight: 700; font-size: .88rem; letter-spacing: .5px;
+      padding: 9px 18px; border-radius: 999px;
+      background: #fff; color: var(--texto); border: 1px solid rgba(200,169,110,.5);
+      transition: all .25s ease; white-space: nowrap;
+    }
+    .tab.activo { background: var(--rojo); color: var(--crema); border-color: var(--rojo); }
+
+    /* =========================================================
+       CATEGORÍA + PLATOS
+       ========================================================= */
+    .categoria { padding: 34px 0 8px; scroll-margin-top: 120px; }
+    .categoria-titulo {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
+    }
+    .categoria-titulo h2 { font-size: 1.7rem; font-weight: 800; color: var(--negro); white-space: nowrap; }
+    .categoria-titulo h2 em { font-style: italic; color: var(--rojo); }
+    .categoria-titulo::after { content: ""; flex: 1; height: 1px; background: rgba(200,169,110,.6); }
+
+    .plato {
+      display: flex; gap: 16px; align-items: stretch;
+      background: #fff; border-radius: var(--radio); padding: 14px;
+      margin-bottom: 14px; border: 1px solid rgba(200,169,110,.3);
+      box-shadow: 0 8px 22px -16px rgba(26,26,26,.5);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .plato:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px rgba(26,26,26,.6); }
+
+    /* ---------- MINIATURA "LIVE" CON VAPOR (CSS puro) ----------
+       Versión compacta del efecto cinematográfico del index:
+       fondo cálido + emoji flotando + vapor ascendente + brillo.
+       --------------------------------------------------------- */
+    .mini-escena {
+      position: relative; flex: 0 0 auto; width: 96px; height: 96px;
+      border-radius: 11px; overflow: hidden;
+      background:
+        radial-gradient(120% 90% at 50% 120%, rgba(0,0,0,.3), transparent 60%),
+        linear-gradient(160deg, #3a2418 0%, #7a3318 45%, #c0612a 100%);
+      display: grid; place-items: center;
+    }
+    .mini-escena::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 45%, rgba(255,210,140,.5), transparent 55%);
+      animation: respira 5s ease-in-out infinite; mix-blend-mode: screen;
+    }
+    .mini-escena::after {
+      content: ""; position: absolute; top: -50%; left: -60%;
+      width: 80%; height: 200%; transform: rotate(20deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+      animation: barrido 6s ease-in-out infinite;
+    }
+    @keyframes respira { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+    @keyframes barrido { 0% { left: -60%; } 60%,100% { left: 130%; } }
+    .mini-escena .emoji {
+      position: relative; z-index: 3; font-size: 2.6rem;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.45));
+      animation: flotaPlato 4.5s ease-in-out infinite;
+    }
+    @keyframes flotaPlato { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-5px) rotate(1deg); } }
+    .mini-vapor { position: absolute; z-index: 2; bottom: 28px; left: 50%; transform: translateX(-50%); width: 60px; height: 70px; pointer-events: none; }
+    .mini-vapor span {
+      position: absolute; bottom: 0; width: 8px; height: 30px; border-radius: 50%;
+      background: linear-gradient(to top, rgba(255,255,255,.55), rgba(255,255,255,0));
+      filter: blur(4px); opacity: 0; animation: humo 4s ease-in infinite;
+    }
+    .mini-vapor span:nth-child(1) { left: 12px; animation-delay: 0s; }
+    .mini-vapor span:nth-child(2) { left: 28px; animation-delay: 1.3s; width: 10px; }
+    .mini-vapor span:nth-child(3) { left: 44px; animation-delay: 2.4s; }
+    @keyframes humo {
+      0% { transform: translateY(0) scaleX(1); opacity: 0; }
+      15% { opacity: .7; }
+      100% { transform: translateY(-62px) scaleX(2.2); opacity: 0; }
+    }
+
+    /* ---------- Texto del plato ---------- */
+    .plato-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .plato-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .plato-info h3 { font-size: 1.12rem; font-weight: 700; color: var(--negro); line-height: 1.2; }
+    .plato-precio { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.15rem; color: var(--rojo); white-space: nowrap; }
+    .plato-desc { font-size: .86rem; color: var(--texto); margin-top: 4px; }
+    .badge-reco {
+      display: inline-flex; align-items: center; gap: 5px; align-self: flex-start;
+      margin-top: 9px; font-size: .68rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+      color: var(--rojo); background: rgba(200,169,110,.22); padding: 4px 10px; border-radius: 999px;
+    }
+
+    /* =========================================================
+       SECCIÓN QR — "Escanea nuestra carta"
+       ========================================================= */
+    .qr-bloque {
+      margin: 48px 0 10px; text-align: center;
+      background: var(--negro); color: var(--crema);
+      border-radius: 20px; padding: 40px 24px;
+    }
+    .qr-bloque h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .qr-bloque h2 em { font-style: italic; color: var(--dorado); }
+    .qr-bloque p { font-size: .92rem; opacity: .8; margin-bottom: 26px; }
+    .qr-marco {
+      display: inline-block; background: #fff; padding: 16px; border-radius: 16px;
+      box-shadow: 0 16px 40px -16px rgba(0,0,0,.6);
+    }
+    #qrcode { width: 200px; height: 200px; display: grid; place-items: center; }
+    #qrcode canvas, #qrcode img { display: block; }
+    .qr-url { margin-top: 18px; font-size: .82rem; letter-spacing: .5px; color: var(--dorado-claro); word-break: break-all; }
+
+    /* =========================================================
+       BOTÓN FIJO INFERIOR — Reservar por WhatsApp
+       ========================================================= */
+    .barra-reserva {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: linear-gradient(0deg, var(--crema) 70%, rgba(253,246,227,0));
+    }
+    .barra-reserva a {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; max-width: 760px; margin: 0 auto;
+      background: var(--wsp); color: #fff; font-weight: 700; font-size: 1rem;
+      padding: 16px; border-radius: 14px; text-transform: uppercase; letter-spacing: .5px;
+      box-shadow: 0 10px 26px -8px rgba(37,211,102,.7);
+      transition: background .25s ease, transform .25s ease;
+    }
+    .barra-reserva a:hover { background: var(--wsp-oscuro); transform: translateY(-2px); }
+    .barra-reserva svg { width: 22px; height: 22px; fill: #fff; }
+
+    /* =========================================================
+       ANIMACIONES DE ENTRADA
+       ========================================================= */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* =========================================================
+       ACCESIBILIDAD: prefers-reduced-motion
+       ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================ TOPBAR ============================ -->
+  <div class="topbar">
+    <div class="logo">La Causa de <span>Don Lucho</span></div>
+    <a class="btn-volver" href="index.html">← Volver</a>
+  </div>
+
+  <!-- ============================ CABECERA CARTA ============================ -->
+  <div class="carta-head">
+    <div class="ornamento"><span>✦</span></div>
+    <h1>Nuestra <em>Carta</em></h1>
+    <p>Cocina criolla · Barranco, Lima</p>
+  </div>
+
+  <!-- ============================ TABS ============================ -->
+  <nav class="tabs" id="tabs">
+    <button class="tab activo" data-target="entradas">Entradas</button>
+    <button class="tab" data-target="fondos">Fondos</button>
+    <button class="tab" data-target="postres">Postres</button>
+    <button class="tab" data-target="bebidas">Bebidas</button>
+  </nav>
+
+  <main class="contenedor">
+
+    <!-- ===================== ENTRADAS ===================== -->
+    <section class="categoria" id="entradas">
+      <div class="categoria-titulo"><h2><em>Entradas</em></h2></div>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍋</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Causa Limeña</h3><span class="plato-precio">S/ 28</span></div>
+          <p class="plato-desc">Papa amarilla con ají y limón, rellena de pollo deshilachado y palta.</p>
+          <span class="badge-reco">⭐ Recomendado</span>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🫑</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Papa a la Huancaína</h3><span class="plato-precio">S/ 22</span></div>
+          <p class="plato-desc">Papa sancochada bañada en cremosa salsa de ají amarillo y queso fresco.</p>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🐟</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Ceviche Clásico</h3><span class="plato-precio">S/ 38</span></div>
+          <p class="plato-desc">Pescado fresco en leche de tigre, cebolla morada, camote y choclo.</p>
+          <span class="badge-reco">⭐ Recomendado</span>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🦐</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Anticuchos de Corazón</h3><span class="plato-precio">S/ 26</span></div>
+          <p class="plato-desc">Brochetas a la parrilla con ají panca, papa dorada y choclo.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===================== FONDOS ===================== -->
+    <section class="categoria" id="fondos">
+      <div class="categoria-titulo"><h2><em>Fondos</em></h2></div>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🥩</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Lomo Saltado</h3><span class="plato-precio">S/ 42</span></div>
+          <p class="plato-desc">Lomo fino al wok con cebolla, tomate y sillao. Papas fritas y arroz.</p>
+          <span class="badge-reco">⭐ Recomendado</span>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍗</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Ají de Gallina</h3><span class="plato-precio">S/ 34</span></div>
+          <p class="plato-desc">Gallina deshilachada en crema de ají amarillo, nueces y parmesano.</p>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍛</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Arroz con Mariscos</h3><span class="plato-precio">S/ 46</span></div>
+          <p class="plato-desc">Arroz cremoso al ají panca cargado de mariscos frescos del día.</p>
+          <span class="badge-reco">⭐ Recomendado</span>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍲</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Seco de Res con Frejoles</h3><span class="plato-precio">S/ 39</span></div>
+          <p class="plato-desc">Res guisada en culantro, servida con frejoles canarios y arroz.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===================== POSTRES ===================== -->
+    <section class="categoria" id="postres">
+      <div class="categoria-titulo"><h2><em>Postres</em></h2></div>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍚</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Arroz con Leche</h3><span class="plato-precio">S/ 14</span></div>
+          <p class="plato-desc">Cremoso, con canela, clavo y un toque de cáscara de naranja.</p>
+          <span class="badge-reco">⭐ Recomendado</span>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍮</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Suspiro a la Limeña</h3><span class="plato-precio">S/ 16</span></div>
+          <p class="plato-desc">Manjar blanco coronado con merengue al oporto. Un clásico de Lima.</p>
+          <span class="badge-reco">⭐ Recomendado</span>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍩</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Picarones</h3><span class="plato-precio">S/ 15</span></div>
+          <p class="plato-desc">Aros de zapallo y camote fritos, bañados en miel de chancaca.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===================== BEBIDAS ===================== -->
+    <section class="categoria" id="bebidas">
+      <div class="categoria-titulo"><h2><em>Bebidas</em></h2></div>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍹</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Pisco Sour</h3><span class="plato-precio">S/ 22</span></div>
+          <p class="plato-desc">Nuestro pisco quebranta, limón, jarabe y la espuma justa. La bandera de la casa.</p>
+          <span class="badge-reco">⭐ Recomendado</span>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🟣</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Chicha Morada</h3><span class="plato-precio">S/ 10</span></div>
+          <p class="plato-desc">Maíz morado hervido con piña, canela y clavo. Jarra fresca de la casa.</p>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">🍋</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Limonada Frozen</h3><span class="plato-precio">S/ 12</span></div>
+          <p class="plato-desc">Limón peruano batido con hielo y hierbabuena. Refrescante al máximo.</p>
+        </div>
+      </article>
+
+      <article class="plato reveal">
+        <div class="mini-escena"><div class="mini-vapor" aria-hidden="true"><span></span><span></span><span></span></div><div class="emoji">☕</div></div>
+        <div class="plato-info">
+          <div class="plato-top"><h3>Café Pasado</h3><span class="plato-precio">S/ 8</span></div>
+          <p class="plato-desc">Café de Chanchamayo, pasado a la antigua. El cierre perfecto.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================ QR REAL ============================ -->
+    <section class="qr-bloque reveal">
+      <h2>Escanea nuestra <em>carta</em></h2>
+      <p>Comparte el menú con tu mesa apuntando la cámara al código.</p>
+      <div class="qr-marco">
+        <div id="qrcode"></div>
+      </div>
+      <div class="qr-url">https://lacausadonlucho.pe/menu</div>
+    </section>
+
+  </main>
+
+  <!-- ============================ BARRA FIJA RESERVAR ============================ -->
+  <div class="barra-reserva">
+    <a href="https://wa.me/51998877665?text=Hola%20Don%20Lucho,%20vi%20la%20carta%20y%20quiero%20reservar" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.515 5.26l-.999 3.648 3.733-.979z"/></svg>
+      Reservar por WhatsApp
+    </a>
+  </div>
+
+  <!-- ===== Librería qrcode.js desde CDN (única dependencia externa) ===== -->
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@master/qrcode.min.js"></script>
+  <script>
+    /* =========================================================
+       1) GENERAR EL QR REAL
+       Apunta a la URL ficticia de la carta digital.
+       ========================================================= */
+    (function generarQR() {
+      var contenedor = document.getElementById('qrcode');
+      if (!contenedor || typeof QRCode === 'undefined') return;
+      new QRCode(contenedor, {
+        text: 'https://lacausadonlucho.pe/menu',
+        width: 200,
+        height: 200,
+        colorDark: '#1a1a1a',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    })();
+
+    /* =========================================================
+       2) TABS DE CATEGORÍAS
+       - Al hacer clic, hace scroll suave a la categoría.
+       - Resalta automáticamente la pestaña según el scroll
+         usando IntersectionObserver sobre cada sección.
+       ========================================================= */
+    (function tabsCategorias() {
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+      var secciones = tabs.map(function (t) { return document.getElementById(t.dataset.target); });
+
+      // Clic en pestaña -> scroll a la sección
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var destino = document.getElementById(tab.dataset.target);
+          if (destino) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // Resaltar pestaña activa según la sección visible
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entradas) {
+          entradas.forEach(function (e) {
+            if (e.isIntersecting) {
+              var id = e.target.id;
+              tabs.forEach(function (t) { t.classList.toggle('activo', t.dataset.target === id); });
+            }
+          });
+        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+        secciones.forEach(function (s) { if (s) obs.observe(s); });
+      }
+    })();
+
+    /* =========================================================
+       3) ANIMACIONES DE ENTRADA (respetando reduced-motion)
+       ========================================================= */
+    (function revelar() {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var elementos = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        elementos.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      elementos.forEach(function (el) { obs.observe(el); });
+    })();
+  </script>
+</body>
+</html>

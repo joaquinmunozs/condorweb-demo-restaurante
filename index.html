@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Causa de Don Lucho · Comida criolla en Barranco, Lima</title>
+  <meta name="description" content="Sabor criollo desde 1987 en Barranco, Lima. Lomo saltado, causa limeña, ceviche clásico y más. Reserva por WhatsApp." />
+
+  <!-- ===== Fuentes: Playfair Display (títulos) + Lato (cuerpo) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       VARIABLES DE DISEÑO — Restaurante criollo premium
+       Dorado #c8a96e · rojo oscuro #8b1a1a · crema #fdf6e3 · negro #1a1a1a
+       ========================================================= */
+    :root {
+      --dorado: #c8a96e;
+      --dorado-claro: #e2cb9a;
+      --rojo: #8b1a1a;
+      --rojo-oscuro: #6e1313;
+      --crema: #fdf6e3;
+      --crema-oscura: #f3e8cc;
+      --negro: #1a1a1a;
+      --negro-suave: #2a2522;
+      --texto: #4a423a;
+      --wsp: #25d366;
+      --wsp-oscuro: #1ebe57;
+      --sombra: 0 20px 50px -24px rgba(26,26,26,.5);
+      --radio: 16px;
+      --max: 1200px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', system-ui, sans-serif;
+      color: var(--texto);
+      background: var(--crema);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.12; }
+
+    .contenedor { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    /* =========================================================
+       BOTONES
+       ========================================================= */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Lato', sans-serif; font-weight: 700; font-size: .98rem;
+      letter-spacing: .3px; padding: 15px 30px; border-radius: 4px;
+      border: none; cursor: pointer; text-transform: uppercase;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    }
+    .btn-oro {
+      background: var(--dorado); color: var(--negro);
+      box-shadow: 0 12px 26px -10px rgba(200,169,110,.8);
+    }
+    .btn-oro:hover { background: var(--dorado-claro); transform: translateY(-3px); }
+    .btn-borde {
+      background: transparent; color: var(--crema);
+      border: 1.5px solid rgba(253,246,227,.5);
+    }
+    .btn-borde:hover { background: var(--crema); color: var(--negro); transform: translateY(-3px); }
+    .btn-wsp { background: var(--wsp); color: #fff; }
+    .btn-wsp:hover { background: var(--wsp-oscuro); transform: translateY(-3px); }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero {
+      position: relative; min-height: 100vh; display: flex; flex-direction: column;
+      color: var(--crema);
+      background:
+        linear-gradient(180deg, rgba(26,26,26,.78) 0%, rgba(110,19,19,.72) 100%),
+        repeating-linear-gradient(45deg, #241f1c 0 28px, #2c2521 28px 56px);
+      overflow: hidden;
+    }
+    /* Textura decorativa: rombos dorados tenues */
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(200,169,110,.12) 1.5px, transparent 1.6px);
+      background-size: 28px 28px; opacity: .6; pointer-events: none;
+    }
+    /* Brillo dorado superior */
+    .hero::after {
+      content: ""; position: absolute; top: -30%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,169,110,.22), transparent 60%);
+      pointer-events: none;
+    }
+
+    .nav {
+      position: relative; z-index: 5;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 26px 0;
+    }
+    .logo-texto { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.4rem; letter-spacing: .5px; color: var(--crema); }
+    .logo-texto .acento { color: var(--dorado); }
+    .nav-links { display: none; gap: 30px; font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover { color: var(--dorado); }
+
+    .hero-centro {
+      position: relative; z-index: 4; flex: 1;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 40px 0 80px;
+    }
+    .hero-sello {
+      font-size: .8rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--dorado); font-weight: 700; margin-bottom: 22px;
+      display: inline-flex; align-items: center; gap: 16px;
+    }
+    .hero-sello::before, .hero-sello::after { content: ""; width: 40px; height: 1px; background: var(--dorado); opacity: .6; }
+    .hero h1 {
+      font-size: clamp(3rem, 11vw, 6.5rem); font-weight: 900;
+      letter-spacing: -1px; margin-bottom: 18px; color: var(--crema);
+      text-shadow: 0 6px 30px rgba(0,0,0,.4);
+    }
+    .hero h1 em { font-style: italic; color: var(--dorado-claro); }
+    .hero .frase { font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 300; letter-spacing: 1px; opacity: .92; margin-bottom: 40px; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+    /* Flecha scroll decorativa */
+    .scroll-hint {
+      position: relative; z-index: 4; text-align: center; padding-bottom: 26px;
+      font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; opacity: .65;
+      animation: subeBaja 2s ease-in-out infinite;
+    }
+    @keyframes subeBaja { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+    /* =========================================================
+       SECCIONES GENERALES
+       ========================================================= */
+    section { padding: 100px 0; }
+    .eyebrow {
+      display: inline-block; color: var(--rojo); font-weight: 700;
+      font-size: .78rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .titulo-seccion { font-size: clamp(2.1rem, 5vw, 3.3rem); font-weight: 800; color: var(--negro); margin-bottom: 16px; }
+    .titulo-seccion em { font-style: italic; color: var(--rojo); }
+    .lead { color: var(--texto); max-width: 600px; font-size: 1.06rem; }
+    .centro { text-align: center; margin: 0 auto 64px; }
+    .centro .lead { margin: 0 auto; }
+    /* Pequeño separador decorativo dorado */
+    .ornamento { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 auto 16px; color: var(--dorado); }
+    .ornamento::before, .ornamento::after { content: ""; width: 50px; height: 1px; background: var(--dorado); }
+    .ornamento span { font-size: 1.1rem; }
+
+    /* =========================================================
+       NUESTRA HISTORIA
+       ========================================================= */
+    .historia { background: var(--crema-oscura); }
+    .grid-historia { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+    .historia-texto .titulo-seccion { margin-bottom: 22px; }
+    .historia-texto p { margin-bottom: 18px; font-size: 1.04rem; }
+    .firma { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--rojo); margin-top: 10px; }
+    /* Imagen placeholder con color cálido (sin imágenes externas) */
+    .historia-foto {
+      position: relative; min-height: 420px; border-radius: var(--radio); overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(200,169,110,.5), transparent 50%),
+        linear-gradient(150deg, #7a2418, #b5571f 55%, #d98e3d);
+      box-shadow: var(--sombra);
+      display: grid; place-items: center;
+    }
+    .historia-foto::after {
+      content: ""; position: absolute; inset: 14px; border: 1.5px solid rgba(253,246,227,.4); border-radius: 10px;
+    }
+    .historia-foto .placa {
+      position: relative; z-index: 2; text-align: center; color: var(--crema); padding: 20px;
+    }
+    .historia-foto .placa .grande { font-family: 'Playfair Display', serif; font-size: 4.5rem; line-height: 1; }
+    .historia-foto .placa .chico { letter-spacing: 3px; text-transform: uppercase; font-size: .8rem; margin-top: 8px; opacity: .9; }
+
+    /* =========================================================
+       PLATOS ESTRELLA — cards con efecto "live" de vapor
+       ========================================================= */
+    .grid-platos { display: grid; grid-template-columns: 1fr; gap: 30px; }
+    .card-plato {
+      background: #fff; border-radius: var(--radio); overflow: hidden;
+      box-shadow: 0 14px 40px -22px rgba(26,26,26,.45);
+      border: 1px solid rgba(200,169,110,.3);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .card-plato:hover { transform: translateY(-10px); box-shadow: var(--sombra); }
+
+    /* ---------- EFECTO "LIVE"/VAPOR (CSS puro, sin video) ----------
+       Escena del plato: capas de gradientes animados que simulan
+       un plato caliente, humeante, con movimiento cinematográfico.
+       Compuesta por:
+         .escena      -> fondo cálido base con luz que respira
+         emoji        -> el plato en el centro con leve flotación
+         .vapor span  -> 3 columnas de vapor que suben y se desvanecen
+         brillo radial-> reflejo de luz que se mueve sobre el plato
+       --------------------------------------------------------------- */
+    .escena {
+      position: relative; height: 220px; overflow: hidden;
+      background:
+        radial-gradient(120% 90% at 50% 120%, rgba(0,0,0,.35), transparent 60%),
+        linear-gradient(160deg, #3a2418 0%, #7a3318 45%, #c0612a 100%);
+      display: grid; place-items: center;
+    }
+    /* Luz cálida que "respira" sobre el plato */
+    .escena::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(255,210,140,.45), transparent 55%);
+      animation: respira 5s ease-in-out infinite; mix-blend-mode: screen;
+    }
+    /* Reflejo de luz que se desliza (efecto cinematográfico) */
+    .escena::after {
+      content: ""; position: absolute; top: -50%; left: -60%;
+      width: 80%; height: 200%; transform: rotate(20deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      animation: barrido 6s ease-in-out infinite;
+    }
+    @keyframes respira { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+    @keyframes barrido { 0% { left: -60%; } 60%, 100% { left: 130%; } }
+
+    .escena .emoji {
+      position: relative; z-index: 3; font-size: 5.2rem;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,.45));
+      animation: flotaPlato 4.5s ease-in-out infinite;
+    }
+    @keyframes flotaPlato { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
+
+    /* Columnas de vapor: 3 trazos que ascienden y se difuminan */
+    .vapor { position: absolute; z-index: 2; bottom: 56px; left: 50%; transform: translateX(-50%); width: 120px; height: 130px; pointer-events: none; }
+    .vapor span {
+      position: absolute; bottom: 0; width: 14px; height: 60px; border-radius: 50%;
+      background: linear-gradient(to top, rgba(255,255,255,.5), rgba(255,255,255,0));
+      filter: blur(7px); opacity: 0;
+      animation: humo 4s ease-in infinite;
+    }
+    .vapor span:nth-child(1) { left: 18px; animation-delay: 0s;   }
+    .vapor span:nth-child(2) { left: 52px; animation-delay: 1.1s; width: 18px; }
+    .vapor span:nth-child(3) { left: 86px; animation-delay: 2.2s; }
+    @keyframes humo {
+      0%   { transform: translateY(0) scaleX(1);   opacity: 0; }
+      15%  { opacity: .7; }
+      100% { transform: translateY(-120px) scaleX(2.4); opacity: 0; }
+    }
+
+    .card-plato .cuerpo { padding: 26px 24px 28px; }
+    .card-plato h3 { font-size: 1.5rem; font-weight: 700; color: var(--negro); margin-bottom: 8px; }
+    .card-plato p { font-size: .96rem; margin-bottom: 18px; }
+    .card-plato .pie { display: flex; align-items: center; justify-content: space-between; }
+    .precio-oro { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.5rem; color: var(--rojo); }
+    .etiqueta-live {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--rojo); background: rgba(139,26,26,.08); padding: 5px 11px; border-radius: 999px;
+    }
+    .etiqueta-live .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rojo); animation: latido 1.4s ease-in-out infinite; }
+    @keyframes latido { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.7); } }
+
+    /* =========================================================
+       GALERÍA DE AMBIENTE — 6 placeholders cálidos
+       ========================================================= */
+    .galeria { background: var(--negro); color: var(--crema); }
+    .galeria .titulo-seccion { color: var(--crema); }
+    .galeria .titulo-seccion em { color: var(--dorado); }
+    .galeria .lead { color: rgba(253,246,227,.7); }
+    .galeria .eyebrow { color: var(--dorado); }
+    .grid-galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .foto-ambiente {
+      position: relative; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden;
+      display: flex; align-items: flex-end; padding: 18px; color: var(--crema);
+      border: 1px solid rgba(200,169,110,.25);
+      transition: transform .35s ease;
+    }
+    .foto-ambiente:hover { transform: scale(1.03); }
+    .foto-ambiente span { position: relative; z-index: 2; font-weight: 700; font-size: .98rem; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
+    .foto-ambiente::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.6)); }
+    /* Cada foto un gradiente tierra/cálido distinto */
+    .f1 { background: linear-gradient(150deg, #8b1a1a, #c0612a); }
+    .f2 { background: linear-gradient(150deg, #6e1313, #b5571f); }
+    .f3 { background: linear-gradient(150deg, #a8742f, #e2cb9a); }
+    .f4 { background: linear-gradient(150deg, #3a2418, #8b4a1a); }
+    .f5 { background: linear-gradient(150deg, #c0612a, #c8a96e); }
+    .f6 { background: linear-gradient(150deg, #7a2418, #a8742f); }
+
+    /* =========================================================
+       CÓMO LLEGAR + MAPA
+       ========================================================= */
+    .grid-llegar { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: stretch; }
+    .datos-card {
+      background: var(--crema-oscura); border-radius: var(--radio); padding: 36px;
+      border: 1px solid rgba(200,169,110,.4);
+    }
+    .datos-fila { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid rgba(200,169,110,.4); }
+    .datos-fila:last-of-type { border-bottom: none; }
+    .datos-fila .ic { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%; background: var(--rojo); display: grid; place-items: center; }
+    .datos-fila .ic svg { width: 22px; height: 22px; stroke: var(--crema); }
+    .datos-fila strong { display: block; color: var(--negro); font-family: 'Playfair Display', serif; font-size: 1.15rem; }
+    .datos-fila span { color: var(--texto); font-size: .95rem; }
+    .mapa-wrap { border-radius: var(--radio); overflow: hidden; min-height: 360px; box-shadow: var(--sombra); border: 3px solid var(--dorado); }
+    .mapa-wrap iframe { width: 100%; height: 100%; min-height: 360px; border: 0; display: block; }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    footer { background: var(--negro-suave); color: rgba(253,246,227,.72); padding: 70px 0 30px; text-align: center; }
+    footer .logo-texto { font-size: 1.8rem; margin-bottom: 14px; display: inline-block; }
+    footer .frase-foot { font-style: italic; font-family: 'Playfair Display', serif; color: var(--dorado-claro); margin-bottom: 26px; }
+    .redes { display: flex; justify-content: center; gap: 16px; margin-bottom: 30px; }
+    .redes a {
+      width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+      border: 1px solid rgba(200,169,110,.4); transition: all .25s ease;
+    }
+    .redes a:hover { background: var(--dorado); border-color: var(--dorado); transform: translateY(-3px); }
+    .redes a:hover svg { fill: var(--negro); }
+    .redes svg { width: 20px; height: 20px; fill: var(--dorado-claro); transition: fill .25s; }
+    .footer-bottom { border-top: 1px solid rgba(200,169,110,.2); padding-top: 24px; margin-top: 10px; font-size: .82rem; opacity: .6; }
+
+    /* =========================================================
+       BOTÓN WHATSAPP FLOTANTE
+       ========================================================= */
+    .wsp-flotante {
+      position: fixed; bottom: 22px; right: 22px; z-index: 999;
+      width: 62px; height: 62px; border-radius: 50%;
+      background: var(--wsp); display: grid; place-items: center;
+      box-shadow: 0 12px 30px -6px rgba(37,211,102,.7);
+      animation: pulso 2.4s ease-in-out infinite; transition: transform .25s ease;
+    }
+    .wsp-flotante:hover { transform: scale(1.08); }
+    .wsp-flotante svg { width: 34px; height: 34px; fill: #fff; }
+    @keyframes pulso {
+      0%   { box-shadow: 0 12px 30px -6px rgba(37,211,102,.7), 0 0 0 0 rgba(37,211,102,.5); }
+      70%  { box-shadow: 0 12px 30px -6px rgba(37,211,102,.7), 0 0 0 16px rgba(37,211,102,0); }
+      100% { box-shadow: 0 12px 30px -6px rgba(37,211,102,.7), 0 0 0 0 rgba(37,211,102,0); }
+    }
+
+    /* =========================================================
+       ANIMACIONES DE ENTRADA (IntersectionObserver)
+       ========================================================= */
+    .reveal { opacity: 0; transform: translateY(38px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (min-width: 720px) {
+      .nav-links { display: flex; }
+      .grid-platos { grid-template-columns: repeat(2, 1fr); }
+      .grid-galeria { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .grid-historia { grid-template-columns: 1fr 1fr; }
+      .grid-platos { grid-template-columns: repeat(4, 1fr); }
+      .grid-llegar { grid-template-columns: 1fr 1.15fr; }
+    }
+
+    /* =========================================================
+       ACCESIBILIDAD: prefers-reduced-motion
+       ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero">
+    <div class="contenedor" style="display:flex;flex-direction:column;flex:1;">
+      <nav class="nav">
+        <div class="logo-texto">La Causa de <span class="acento">Don Lucho</span></div>
+        <div class="nav-links">
+          <a href="#historia">Historia</a>
+          <a href="#platos">Platos</a>
+          <a href="menu.html">Carta</a>
+          <a href="#llegar">Cómo llegar</a>
+        </div>
+      </nav>
+
+      <div class="hero-centro">
+        <span class="hero-sello reveal">Cocina criolla peruana</span>
+        <h1 class="reveal d1">La Causa de <em>Don Lucho</em></h1>
+        <p class="frase reveal d2">Sabor criollo desde 1987 · Barranco, Lima</p>
+        <div class="hero-cta reveal d3">
+          <a class="btn btn-oro" href="menu.html">Ver la carta</a>
+          <a class="btn btn-borde" href="https://wa.me/51998877665?text=Hola%20Don%20Lucho,%20quiero%20reservar%20una%20mesa" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">Desliza para descubrir ↓</div>
+  </header>
+
+  <!-- ============================ HISTORIA ============================ -->
+  <section class="historia" id="historia">
+    <div class="contenedor">
+      <div class="grid-historia">
+        <div class="historia-texto reveal">
+          <span class="eyebrow">Nuestra historia</span>
+          <h2 class="titulo-seccion">Tres generaciones de <em>sazón</em></h2>
+          <p>Todo comenzó en 1987, cuando Don Lucho Quispe abrió las puertas de una pequeña fonda en una esquina de Barranco. Llegó de Arequipa con las recetas de su abuela guardadas en la memoria y un solo objetivo: que nadie se fuera con hambre.</p>
+          <p>Hoy, casi cuatro décadas después, seguimos cocinando con la misma olla de barro, el mismo ají molido a mano y el mismo cariño de siempre. Aquí el lomo se saltea a fuego vivo y la causa se arma a la vista del comensal.</p>
+          <p class="firma">— Familia Quispe</p>
+        </div>
+        <div class="historia-foto reveal d2" aria-hidden="true">
+          <div class="placa">
+            <div class="grande">1987</div>
+            <div class="chico">Desde entonces, criollo de verdad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PLATOS ESTRELLA ============================ -->
+  <section id="platos">
+    <div class="contenedor">
+      <div class="centro reveal">
+        <div class="ornamento"><span>✦</span></div>
+        <span class="eyebrow">Lo más pedido</span>
+        <h2 class="titulo-seccion">Nuestros platos <em>estrella</em></h2>
+        <p class="lead">Recetas que cruzan generaciones, servidas calientes y al momento. Mira cómo humean.</p>
+      </div>
+
+      <div class="grid-platos">
+        <!-- Plato 1: Ceviche -->
+        <article class="card-plato reveal d1">
+          <div class="escena">
+            <div class="vapor" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="emoji">🐟</div>
+          </div>
+          <div class="cuerpo">
+            <h3>Ceviche Clásico</h3>
+            <p>Pescado fresco del día en leche de tigre, cebolla morada, camote y choclo serrano.</p>
+            <div class="pie">
+              <span class="precio-oro">S/ 38</span>
+              <span class="etiqueta-live"><span class="dot"></span> Recién hecho</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Plato 2: Lomo Saltado -->
+        <article class="card-plato reveal d2">
+          <div class="escena">
+            <div class="vapor" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="emoji">🥩</div>
+          </div>
+          <div class="cuerpo">
+            <h3>Lomo Saltado</h3>
+            <p>Lomo fino salteado al wok con cebolla, tomate y un toque de sillao. Con papas fritas y arroz.</p>
+            <div class="pie">
+              <span class="precio-oro">S/ 42</span>
+              <span class="etiqueta-live"><span class="dot"></span> A fuego vivo</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Plato 3: Causa Limeña -->
+        <article class="card-plato reveal d3">
+          <div class="escena">
+            <div class="vapor" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="emoji">🍋</div>
+          </div>
+          <div class="cuerpo">
+            <h3>Causa Limeña</h3>
+            <p>Papa amarilla prensada con ají y limón, rellena de pollo o palta. La receta de la abuela.</p>
+            <div class="pie">
+              <span class="precio-oro">S/ 28</span>
+              <span class="etiqueta-live"><span class="dot"></span> De la casa</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Plato 4: Arroz con Leche -->
+        <article class="card-plato reveal d4">
+          <div class="escena">
+            <div class="vapor" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="emoji">🍚</div>
+          </div>
+          <div class="cuerpo">
+            <h3>Arroz con Leche</h3>
+            <p>Cremoso, con canela, clavo y un toque de cáscara de naranja. El final perfecto.</p>
+            <div class="pie">
+              <span class="precio-oro">S/ 14</span>
+              <span class="etiqueta-live"><span class="dot"></span> Tibio</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align:center;margin-top:54px;" class="reveal">
+        <a class="btn btn-oro" href="menu.html">Ver la carta completa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ GALERÍA DE AMBIENTE ============================ -->
+  <section class="galeria">
+    <div class="contenedor">
+      <div class="centro reveal">
+        <div class="ornamento"><span>✦</span></div>
+        <span class="eyebrow">El ambiente</span>
+        <h2 class="titulo-seccion">Un rincón con <em>alma criolla</em></h2>
+        <p class="lead">Paredes de adobe, música criolla en vivo los domingos y el aroma del ají recién molido.</p>
+      </div>
+
+      <div class="grid-galeria">
+        <div class="foto-ambiente f1 reveal d1"><span>Salón principal</span></div>
+        <div class="foto-ambiente f2 reveal d2"><span>Barra de piscos</span></div>
+        <div class="foto-ambiente f3 reveal d3"><span>Patio interior</span></div>
+        <div class="foto-ambiente f4 reveal d1"><span>La cocina a la vista</span></div>
+        <div class="foto-ambiente f5 reveal d2"><span>Mesa de la familia</span></div>
+        <div class="foto-ambiente f6 reveal d3"><span>Música criolla en vivo</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CÓMO LLEGAR ============================ -->
+  <section id="llegar">
+    <div class="contenedor">
+      <div class="centro reveal">
+        <div class="ornamento"><span>✦</span></div>
+        <span class="eyebrow">Cómo llegar</span>
+        <h2 class="titulo-seccion">Te esperamos en <em>Barranco</em></h2>
+      </div>
+
+      <div class="grid-llegar">
+        <div class="datos-card reveal d1">
+          <div class="datos-fila">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><strong>Dirección</strong><span>Jr. Unión 245, Barranco, Lima</span></div>
+          </div>
+          <div class="datos-fila">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div><strong>Horario</strong><span>Martes a Domingo · 12:00 pm – 10:00 pm</span></div>
+          </div>
+          <div class="datos-fila">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+            <div><strong>Reservas</strong><span>WhatsApp +51 998 877 665</span></div>
+          </div>
+          <div style="margin-top:26px;">
+            <a class="btn btn-wsp" style="width:100%;justify-content:center;" href="https://wa.me/51998877665?text=Hola%20Don%20Lucho,%20quiero%20reservar%20una%20mesa" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.515 5.26l-.999 3.648 3.733-.979z"/></svg>
+              Reservar una mesa
+            </a>
+          </div>
+        </div>
+
+        <div class="mapa-wrap reveal d2">
+          <iframe
+            title="Ubicación La Causa de Don Lucho en Barranco"
+            src="https://www.google.com/maps?q=Barranco,+Lima,+Per%C3%BA&z=15&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer>
+    <div class="contenedor">
+      <div class="logo-texto">La Causa de <span class="acento">Don Lucho</span></div>
+      <p class="frase-foot">"Donde el sabor criollo se hace familia"</p>
+
+      <!-- Redes sociales (íconos SVG) -->
+      <div class="redes">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.8c-3.15 0-3.5.01-4.74.07-1.14.05-1.76.24-2.17.4-.55.21-.94.47-1.35.88-.41.41-.67.8-.88 1.35-.16.41-.35 1.03-.4 2.17-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.05 1.14.24 1.76.4 2.17.21.55.47.94.88 1.35.41.41.8.67 1.35.88.41.16 1.03.35 2.17.4 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.14-.05 1.76-.24 2.17-.4.55-.21.94-.47 1.35-.88.41-.41.67-.8.88-1.35.16-.41.35-1.03.4-2.17.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.14-.24-1.76-.4-2.17a3.6 3.6 0 0 0-.88-1.35 3.6 3.6 0 0 0-1.35-.88c-.41-.16-1.03-.35-2.17-.4-1.24-.06-1.59-.07-4.74-.07zm0 3.06a4.98 4.98 0 1 1 0 9.96 4.98 4.98 0 0 1 0-9.96zm0 8.21a3.23 3.23 0 1 0 0-6.46 3.23 3.23 0 0 0 0 6.46zm6.34-8.41a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0z"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.2v12.86a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .7-5.08v-3.3a5.84 5.84 0 0 0-.7-.04 5.88 5.88 0 1 0 5.88 5.88V9.4a7.5 7.5 0 0 0 4.38 1.4V7.6a4.28 4.28 0 0 1-3.41-1.78z"/></svg></a>
+      </div>
+
+      <div style="margin-bottom:8px;">Jr. Unión 245, Barranco · Mar–Dom 12pm–10pm · +51 998 877 665</div>
+      <div class="footer-bottom">© 2026 La Causa de Don Lucho · Barranco, Lima · Sabor criollo desde 1987</div>
+    </div>
+  </footer>
+
+  <!-- ============================ WHATSAPP FLOTANTE ============================ -->
+  <a class="wsp-flotante" href="https://wa.me/51998877665?text=Hola%20Don%20Lucho,%20quiero%20reservar" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.515 5.26l-.999 3.648 3.733-.979zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  </a>
+
+  <script>
+    /* ===== Animaciones de entrada con IntersectionObserver ===== */
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var elementos = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        elementos.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      elementos.forEach(function (el) { obs.observe(el); });
+    })();
+  </script>
+</body>
+</html>
