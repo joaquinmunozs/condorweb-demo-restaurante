@@ -211,7 +211,7 @@
     .galeria { background: radial-gradient(75% 60% at 50% 100%, rgba(139,26,26,.10), transparent 60%), var(--crema-oscura); }
     #llegar { background: radial-gradient(70% 55% at 50% 0%, rgba(200,169,110,.12), transparent 60%); }
     .grid-galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .foto-ambiente { position: relative; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; display: flex; align-items: flex-end; padding: 16px; color: var(--crema); border: 1px solid rgba(200,169,110,.3); transition: transform .35s ease, box-shadow .35s ease; }
+    .foto-ambiente { position: relative; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; display: flex; align-items: flex-end; padding: 16px; color: var(--crema); border: 1px solid rgba(200,169,110,.3); transition: transform .35s ease, box-shadow .35s ease; background-size: cover; background-position: center; }
     .foto-ambiente:hover { transform: scale(1.04) translateY(-4px); box-shadow: var(--sombra); }
     .foto-ambiente span { position: relative; z-index: 2; font-weight: 700; font-size: .92rem; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
     .foto-ambiente::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.6)); }
@@ -418,12 +418,12 @@
         <p class="lead">Paredes de adobe, música criolla en vivo los domingos y el aroma del ají recién molido.</p>
       </div>
       <div class="grid-galeria">
-        <div class="foto-ambiente f1 reveal d1"><span>Salón principal</span></div>
-        <div class="foto-ambiente f2 reveal d2"><span>Barra de piscos</span></div>
-        <div class="foto-ambiente f3 reveal d3"><span>Patio interior</span></div>
-        <div class="foto-ambiente f4 reveal d1"><span>La cocina a la vista</span></div>
-        <div class="foto-ambiente f5 reveal d2"><span>Mesa de la familia</span></div>
-        <div class="foto-ambiente f6 reveal d3"><span>Música criolla en vivo</span></div>
+        <div class="foto-ambiente reveal d1" style="background-image:url('assets/galeria/salon.jpg')"><span>Salón principal</span></div>
+        <div class="foto-ambiente reveal d2" style="background-image:url('assets/galeria/barra.jpg')"><span>Barra de piscos</span></div>
+        <div class="foto-ambiente reveal d3" style="background-image:url('assets/galeria/patio.jpg')"><span>Patio interior</span></div>
+        <div class="foto-ambiente reveal d1" style="background-image:url('assets/galeria/cocina.jpg')"><span>La cocina a la vista</span></div>
+        <div class="foto-ambiente reveal d2" style="background-image:url('assets/galeria/mesa.jpg')"><span>Mesa de la familia</span></div>
+        <div class="foto-ambiente reveal d3" style="background-image:url('assets/galeria/musica.jpg')"><span>Música criolla en vivo</span></div>
       </div>
     </div>
   </section>
